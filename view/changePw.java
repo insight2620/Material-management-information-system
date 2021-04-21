@@ -3,7 +3,6 @@ package store_ma.view;
 import store_ma.dao.UserDao;
 import store_ma.model.Users;
 import store_ma.util.StringUtil;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -17,25 +16,25 @@ public class changePw extends JFrame {
     private JButton button;
 
     public changePw() {
-        super("ĞŞ¸ÄÃÜÂë");
+        super("ä¿®æ”¹å¯†ç ");
         this.setSize(400, 290);
         this.setLocationRelativeTo(null);
         this.setLayout(new GridLayout(8, 1));
 
-        //¶¨Òå×é¼ş
-        label = new JLabel("ĞŞ¸ÄÃÜÂë");
-        label.setFont(new Font("Á¥Êé", Font.BOLD, 14));
-        label1 = new JLabel("Ô­ÕËºÅ:");
-        label1.setFont(new Font("Á¥Êé", Font.BOLD, 14));
-        label2 = new JLabel("Ô­ÃÜÂë:");
-        label2.setFont(new Font("Á¥Êé", Font.BOLD, 14));
-        label3 = new JLabel("ĞÂÃÜÂë:");
-        label3.setFont(new Font("Á¥Êé", Font.BOLD, 14));
+        //å®šä¹‰ç»„ä»¶
+        label = new JLabel("ä¿®æ”¹å¯†ç ");
+        label.setFont(new Font("éš¶ä¹¦", Font.BOLD, 14));
+        label1 = new JLabel("åŸè´¦å·:");
+        label1.setFont(new Font("éš¶ä¹¦", Font.BOLD, 14));
+        label2 = new JLabel("åŸå¯†ç :");
+        label2.setFont(new Font("éš¶ä¹¦", Font.BOLD, 14));
+        label3 = new JLabel("æ–°å¯†ç :");
+        label3.setFont(new Font("éš¶ä¹¦", Font.BOLD, 14));
         text1 = new JTextField(12);
         text2 = new JPasswordField(12);
         text3 = new JPasswordField(12);
-        button = new JButton("È·ÈÏ");
-        button.setFont(new Font("Á¥Êé", Font.PLAIN, 14));
+        button = new JButton("ç¡®è®¤");
+        button.setFont(new Font("éš¶ä¹¦", Font.PLAIN, 14));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,7 +44,7 @@ public class changePw extends JFrame {
 
         //button.setBackground(Color.gray);
 
-        //¶¨ÒåÎå¸öÃæ°å,²¢¸øÃ¿¸öÃæ°åÌí¼Ó²»Í¬µÄ×é¼ş
+        //å®šä¹‰äº”ä¸ªé¢æ¿,å¹¶ç»™æ¯ä¸ªé¢æ¿æ·»åŠ ä¸åŒçš„ç»„ä»¶
         JPanel panel1 = new JPanel();
         panel1.add(label);
         JPanel panel2 = new JPanel();
@@ -70,22 +69,22 @@ public class changePw extends JFrame {
     }
 
     protected void changePassword(){
-        //´Ó½çÃæ»ñÈ¡ÓÃ»§ÃûºÍÃÜÂë
+        //ä»ç•Œé¢è·å–ç”¨æˆ·åå’Œå¯†ç 
         String userName = text1.getText();
         String password = new String(text2.getPassword());
         String newpassword = new String(text3.getPassword());
-        //½øĞĞÏòÉÏ×ªĞÍ
+        //è¿›è¡Œå‘ä¸Šè½¬å‹
         if(StringUtil.isEmpty(userName)){
-            JOptionPane.showMessageDialog(this,"ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡");
+            JOptionPane.showMessageDialog(this,"ç”¨æˆ·åä¸èƒ½ä¸ºç©ºï¼");
             return;
         }
         if(StringUtil.isEmpty(password)){
-            JOptionPane.showMessageDialog(this,"ÃÜÂë²»ÄÜÎª¿Õ£¡");
+            JOptionPane.showMessageDialog(this,"å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
             return;
         }
 
         Users UserTmp = null;
-        //½«»ñÈ¡µ½µÄÃÜÂëºÍÓÃ»§ÃûÉèÖÃµ½UserTmpÖĞ
+        //å°†è·å–åˆ°çš„å¯†ç å’Œç”¨æˆ·åè®¾ç½®åˆ°UserTmpä¸­
         UserTmp =new Users();
         UserTmp.setName(userName);
         UserTmp.setPassword(password);
@@ -93,15 +92,15 @@ public class changePw extends JFrame {
         UserDao Userdao = new UserDao();
         Users Userresult = Userdao.login(UserTmp);
 
-        //Ò»²éÑ¯Íê¾ÍÊÍ·Å
+        //ä¸€æŸ¥è¯¢å®Œå°±é‡Šæ”¾
         Userdao.closeDao();
         if(Userresult == null){
-            JOptionPane.showMessageDialog(this,"ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+            JOptionPane.showMessageDialog(this,"ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
             return;
         }
         UserDao Userpw = new UserDao();
         if(Userpw.correctPw(Userresult,newpassword)) {
-            JOptionPane.showMessageDialog(this,"ĞŞ¸Ä³É¹¦£¡");
+            JOptionPane.showMessageDialog(this,"ä¿®æ”¹æˆåŠŸï¼");
         }
         Userpw.closeDao();
 
